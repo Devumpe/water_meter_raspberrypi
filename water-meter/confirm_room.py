@@ -19,8 +19,11 @@ def click(btn):
 
     
     elif btn == 'Enter':
-        textentry.insert('end',pin)
-        linkcamera()
+        if btn == ' ':
+            print('please type username')
+        else:
+            textentry.insert('end',pin)
+            linkcamera()
         
     else:
         pin += btn
@@ -29,7 +32,7 @@ def click(btn):
 def linkcamera():
     today = datetime.now()
     date = today.strftime('%d/%m/%Y Time = %H:%M:%S')
-    text_file = open('/home/pi/water-meter/data_for_show.txt','a')
+    text_file = open('data_for_show.txt','a')
     text_file.write(pin+'\n')
     text_file.write(date+'\n')
     text_file.close()

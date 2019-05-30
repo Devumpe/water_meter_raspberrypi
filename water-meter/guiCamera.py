@@ -1,4 +1,4 @@
-import tkinter
+from Tkinter import *
 import picamera
 from threading import Thread
 import time
@@ -17,11 +17,11 @@ rqs=RQS_0
 
 
              
-root = tkinter.Tk()
+root = Tk()
                          
 HEIGHT = 1000
 WIDTH = 1900
-canvas = tkinter.Canvas(root,height=HEIGHT,width=WIDTH).pack()
+canvas = Canvas(root,height=HEIGHT,width=WIDTH).pack()
 
 
 def camHandler():
@@ -37,14 +37,14 @@ def camHandler():
     camera.resolution = (1024, 768)
     #camera.resolution = (400, 300)
 
-    text_file = open('/home/pi/water-meter/data_for_show.txt','a')
+    text_file = open('data_for_show.txt','a')
     
     while rqs != RQS_QUIT:
         if rqs == RQS_CAPTURE:
             #print("Capture")
             rqs=RQS_0
             timeStamp = today.strftime("%Y%m%d-%H%M")
-            jpgFile='image/'+'img_'+timeStamp+'.jpg'
+            jpgFile=('image/'+'img_'+timeStamp+'.jpg')
             camera.resolution = (900, 500)    #set photo size
             camera.capture(jpgFile)
             #camera.resolution = (1280, 989)   #resume preview size
@@ -93,16 +93,16 @@ def linkshow():
     root.destroy()
 
 
-f = tkinter.Frame(root)
+f = Frame(root)
 f.place(relx=0.5,rely=0.02,relwidth=0.8,relheight=0.8,anchor='n')
 
-frame = tkinter.Label(f)
+frame = Label(f)
 frame.pack(side="bottom",fill="both",expand = "yes")
 
-labelCapVal = tkinter.StringVar()
-tkinter.Label(frame, textvariable=labelCapVal).pack()
+labelCapVal = StringVar()
+Label(frame, textvariable=labelCapVal).pack()
 
-button = tkinter.Button(root,text="Capture",font='Helvetica 22' , command=capture,background='DeepSkyblue3',foreground='white')
+button = Button(root,text="Capture",font='Helvetica 22' , command=capture,background='DeepSkyblue3',foreground='white')
 button.pack()         
 button.place(relx=0.3, rely=0.83, relheight=0.15, relwidth=0.4)
  

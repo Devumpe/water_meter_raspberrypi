@@ -20,15 +20,16 @@ def click(btn):
 
     
     elif btn == 'Enter':
-        textentry.insert('end',username)
-
-
-        linkcomfirm()
+        if btn == '':
+            print('please type username')
+        else:
+            textentry.insert('end',username)
+            linkcomfirm()
     else:
         username += btn
     
         textentry.insert('end', btn)
-    text_file = open('/home/pi/water-meter/data_for_show.txt','w')
+    text_file = open('data_for_show.txt','w')
     text_file.write(username+'\n')
     text_file.close()
     

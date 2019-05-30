@@ -10,9 +10,39 @@ import urllib2
 from threading import Thread
 
 def readFile():
+    global root
+    root = Tk()
+    
+    canv = Canvas(root, width=1900, height=1000, bg='white')
+    canv.grid(row=2, column=3)
+    labeltexttop = Label(root,text="Water Meter Camera", font='Helvetica 35 bold',background='DeepSkyblue2',foreground='white')
+    labeltexttop.place(relx=0.5, rely=0,relwidth=1, relheight=0.2,anchor='n')
+
+    
+    photo = Image.open("correct.jpg")
+
+    photo.resize((5, 5), Image.ANTIALIAS)
+    img = ImageTk.PhotoImage(photo)  
+    background_label = Label(root,background='white', image=img)
+    background_label.place(relx=0.5, rely=0.25,relwidth=0.4, relheight=0.4,anchor='n')
+
+
+
+    
+    textlabel = Label(root,background='white',foreground='DeepSkyblue3',text='Upload Done!',font='Helvetica 22 bold')
+    textlabel.place(relx=0.5, rely=0.75,anchor='n')
+
+   
+    button = Button(root,text="NEXT", font='Helvetica 30' , background='DeepSkyblue3',foreground='white',command=linklogin)
+    button.place(relx=0.3, rely=0.83, relheight=0.15, relwidth=0.4)
+
+
+
+
+    root.mainloop()
     text_file = open('data_for_upload.txt','r')
     line = text_file.read().splitlines()
-    print (len(line))
+    #print (len(line))
     for i in range(0,len(line)):  
         if(i%4==0):
             textuser = line[i]
@@ -23,6 +53,8 @@ def readFile():
             #return (textdate , textrfid , textimage)
 
 def internet_on():
+    global root
+
     try:
         urllib2.urlopen('http://www.google.com/')
 
@@ -39,7 +71,7 @@ def internet_on():
         labeltexttop.place(relx=0.5, rely=0,relwidth=1, relheight=0.2,anchor='n')
 
         
-        photo = Image.open("Dicut11.jpg")
+        photo = Image.open("incorrect.png")
 
         photo.resize((5, 5), Image.ANTIALIAS)
         img = ImageTk.PhotoImage(photo)  
@@ -49,11 +81,11 @@ def internet_on():
 
 
         
-        textlabel = Label(root,background='white',foreground='DeepSkyblue3',text='Upload Done!',font='Helvetica 22 bold')
+        textlabel = Label(root,background='white',foreground='red',text='Upload Fail!',font='Helvetica 22 bold')
         textlabel.place(relx=0.5, rely=0.75,anchor='n')
 
        
-        button = Button(root,text="NEXT", font='Helvetica 30' , background='DeepSkyblue3',foreground='white',command=quit)
+        button = Button(root,text="NEXT", font='Helvetica 30' , background='DeepSkyblue3',foreground='white',command=linklogin)
         button.place(relx=0.3, rely=0.83, relheight=0.15, relwidth=0.4)
 
 
@@ -61,9 +93,16 @@ def internet_on():
 
         root.mainloop()
 
+def linklogin():
+    Popen(["python" , "login.py"])
+
+    global root
+    root.destroy()
+
 
 def upimage(user,rfid,date,image):
-# ไฟล์ที่จะอัพ
+# ไฟล์ที่จะอัw
+    
     config = {
     "apiKey": "AIzaSyB_jnpsPaxKs3xEhs-AbknZJXjcK-M4IeU",
     "authDomain": "water-meter-235712.firebaseapp.com",
@@ -98,37 +137,9 @@ def upimage(user,rfid,date,image):
     db = firebase.database()
 
     db.child("room").push({"image": {"staffname":user,"rfid":rfid,"date": date,"url": blob.public_url}})
-    open("nwdata.txt", 'w').close()
-
-    root = Tk()
-    
-    canv = Canvas(root, width=1900, height=1000, bg='white')
-    canv.grid(row=2, column=3)
-    labeltexttop = Label(root,text="Water Meter Camera", font='Helvetica 35 bold',background='DeepSkyblue2',foreground='white')
-    labeltexttop.place(relx=0.5, rely=0,relwidth=1, relheight=0.2,anchor='n')
-
-    
-    photo = Image.open("correct.jpg")
-
-    photo.resize((5, 5), Image.ANTIALIAS)
-    img = ImageTk.PhotoImage(photo)  
-    background_label = Label(root,background='white', image=img)
-    background_label.place(relx=0.5, rely=0.25,relwidth=0.4, relheight=0.4,anchor='n')
+    open("data_for_upload.txt", 'w').close()
 
 
-
-    
-    textlabel = Label(root,background='white',foreground='DeepSkyblue3',text='Upload Done!',font='Helvetica 22 bold')
-    textlabel.place(relx=0.5, rely=0.75,anchor='n')
-
-   
-    button = Button(root,text="NEXT", font='Helvetica 30' , background='DeepSkyblue3',foreground='white',command=quit)
-    button.place(relx=0.3, rely=0.83, relheight=0.15, relwidth=0.4)
-
-
-
-
-    root.mainloop()
 
 
 

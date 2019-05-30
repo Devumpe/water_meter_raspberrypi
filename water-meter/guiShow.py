@@ -23,9 +23,9 @@ labeltexttop = Label(root,text="Water Meter Camera", font='Helvetica 35 bold',ba
 labeltexttop.place(relx=0.5, rely=0,relwidth=1, relheight=0.2,anchor='n')
 
 i=0;
-text_file = open('/home/pi/water-meter/data_for_show.txt','r')
-mem_file = open('/home/pi/water-meter/data_for_memory.txt','a')
-upload_file = open('/home/pi/water-meter/data_for_upload.txt','a')
+text_file = open('data_for_show.txt','r')
+mem_file = open('data_for_memory.txt','a')
+upload_file = open('data_for_upload.txt','a')
 
 line = text_file.read().splitlines()   
 textusername = line[i]
