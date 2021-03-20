@@ -40,7 +40,7 @@ httplib2==0.12.3
 idna==2.8
 ipaddress==1.0.17
 itsdangerous==0.24
-Jinja2==2.8
+Jinja2==2.11.3
 jws==0.1.3
 keyring==10.1
 keyrings.alt==1.3
