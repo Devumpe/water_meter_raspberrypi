@@ -102,5 +102,5 @@ touchphat==0.0.1
 transitions==0.6.9
 twython==3.4.0
 unicornhathd==0.0.4
-urllib3==1.25.3
+urllib3==1.25.8
 Werkzeug==0.11.15
