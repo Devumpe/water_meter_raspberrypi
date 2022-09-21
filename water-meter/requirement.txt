@@ -76,7 +76,7 @@ pyOpenSSL==16.2.0
 Pyrebase==3.0.27
 pyrfidhid==1.0
 pyserial==3.2.1
-python-jwt==2.0.1
+python-jwt==3.3.4
 pytz==2019.1
 pyusb==1.0.2
 pyxdg==0.25
